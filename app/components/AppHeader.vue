@@ -7,7 +7,7 @@ const { isNotAtTop } = useScrollbar();
 		class="fixed top-0 w-full bg-background z-10"
 		:class="{ 'border-b border-border': isNotAtTop }"
 	>
-		<header class="container mx-auto flex justify-between items-center p-4">
+		<header class="container mx-auto flex justify-between items-center py-4">
 			<BaseButton
 				href="/"
 				variant="ghost"

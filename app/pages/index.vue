@@ -8,7 +8,5 @@ useSeoMeta({
 </script>
 
 <template>
-	<NuxtLayout>
-		<HeroSection />
-	</NuxtLayout>
+	<HeroSection />
 </template>

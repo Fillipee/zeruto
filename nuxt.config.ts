@@ -9,6 +9,8 @@ export default defineNuxtConfig({
 		'@nuxt/fonts',
 		'@nuxtjs/color-mode',
 		'@nuxtjs/sitemap',
+		'@nuxtjs/mdc',
+		'@nuxt/image',
 	],
 
 	components: [
