@@ -1,0 +1,44 @@
+{
+  "format_on_save": "on",
+  "languages": {
+    "Vue.js": {
+      "language_servers": [
+        "eslint",
+        "vue"
+      ],
+      "formatter": "language_server",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "TypeScript": {
+      "language_servers": [
+        "eslint",
+        "typescript-language-server"
+      ],
+      "formatter": "language_server",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JavaScript": {
+      "language_servers": [
+        "eslint",
+        "typescript-language-server"
+      ],
+      "formatter": "language_server",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    }
+  },
+  "lsp": {
+    "eslint": {
+      "settings": {
+        "workingDirectory": {
+          "mode": "auto"
+        }
+      }
+    }
+  }
+}
