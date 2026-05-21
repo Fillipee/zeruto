@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const title = 'Žeru to.';
+const title = 'Recepty | Žeru to.';
 
 useSeoMeta({
 	title: title,
@@ -9,6 +9,6 @@ useSeoMeta({
 
 <template>
 	<NuxtLayout>
-		<HeroSection />
+		TEST
 	</NuxtLayout>
 </template>
