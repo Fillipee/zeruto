@@ -20,12 +20,12 @@ const metaItems = computed(() => {
 <template>
 	<NuxtLink
 		:to="`/recepty/${recipe.slug}`"
-		class="group block"
+		class="group block h-full"
 	>
 		<article
-			class="p-6 cursor-pointer transition border border-border group-hover:border-primary"
+			class="h-full flex flex-col p-6 cursor-pointer transition border border-border group-hover:border-primary"
 		>
-			<div class="aspect-[4/3] relative mb-6 overflow-hidden">
+			<div class="aspect-[4/3] relative mb-6 overflow-hidden shrink-0">
 				<NuxtImg
 					v-if="recipe.data.image"
 					:src="recipe.data.image"
@@ -39,7 +39,7 @@ const metaItems = computed(() => {
 				</span>
 			</div>
 
-			<div class="space-y-2">
+			<div class="space-y-2 flex flex-col flex-grow">
 				<div class="flex items-center justify-between">
 					<span class="font-mono text-xs tracking-widest uppercase text-muted-foreground">
 						{{ category }}
@@ -62,14 +62,14 @@ const metaItems = computed(() => {
 
 				<p
 					v-if="recipe.data.description"
-					class="text-sm text-muted leading-relaxed"
+					class="text-sm text-muted leading-relaxed flex-grow"
 				>
 					{{ recipe.data.description }}
 				</p>
 
 				<div
 					v-if="metaItems.length > 0"
-					class="flex gap-6 pt-2"
+					class="flex gap-6 pt-2 mt-auto"
 				>
 					<div
 						v-for="item in metaItems"
