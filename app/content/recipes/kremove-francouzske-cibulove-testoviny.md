@@ -5,7 +5,7 @@ date: '2026-05-22'
 image: 'recipes/kremove-francouzske-cibulove-testoviny.webp'
 cookTime: '60 min'
 servings: '4 porce'
-difficulty: 'Snadné'
+difficulty: 'Střední'
 tags:
   - 'oběd'
   - 'těstoviny'
