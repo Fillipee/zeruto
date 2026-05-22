@@ -23,8 +23,6 @@ ingredients:
   - title: 'Krutony'
     items:
       - 'pečivo'
-      - 'olivový olej'
-      - 'sůl a pepř'
 ---
 
 1. Nejprve orestujte na másle cibuli. Přidejte hrášek, promíchejte, osolte, opepřete a zalejte zeleninovým vývarem a vše přiveďte k varu.
