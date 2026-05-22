@@ -26,8 +26,6 @@ ingredients:
       - '2 lžíce cukru krystal'
 ---
 
-## Postup
-
 1. Rozválíme listové těsto na velikost plechu + okraje a přeneseme na plech.
 2. Smícháme tvaroh, žlouky, pudinky, olej, mléko, cukr.
 3. Tuto řídkou směs nalijeme na listové těsto.
