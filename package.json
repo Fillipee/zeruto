@@ -17,6 +17,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/mdc": "^0.22.0",
     "@nuxtjs/sitemap": "^8.0.15",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
     "eslint": "^10.3.0",
     "nuxt": "^4.4.4",

@@ -52,9 +52,13 @@ const metaItems = computed(() => {
 					</span>
 				</div>
 
-				<h3 class="text-xl font-black tracking-tight uppercase">
+				<BaseHeading
+					level="h3"
+					variant="h3"
+					class="text-balance"
+				>
 					{{ recipe.data.title }}
-				</h3>
+				</BaseHeading>
 
 				<p
 					v-if="recipe.data.description"
@@ -63,7 +67,10 @@ const metaItems = computed(() => {
 					{{ recipe.data.description }}
 				</p>
 
-				<div class="flex gap-6 pt-2">
+				<div
+					v-if="metaItems.length > 0"
+					class="flex gap-6 pt-2"
+				>
 					<div
 						v-for="item in metaItems"
 						:key="item.label"

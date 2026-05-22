@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { fetchRecipeBySlug, fetchRecipes } = useRecipes();
+const { fetchRecipeBySlug } = useRecipes();
 
 const route = useRoute();
 const slugParam = Array.isArray(route.params.slug) ? route.params.slug[0] : route.params.slug;
@@ -11,26 +11,12 @@ if (!recipe.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Recept nebyl nalezen.' });
 }
 
-const { data: allRecipes } = await useAsyncData('recipes-all', fetchRecipes);
-const relatedRecipes = computed(() => {
-	if (!recipe.value || !allRecipes.value) return [];
-	const currentTags = recipe.value.data.tags;
-	return allRecipes.value
-		.filter(r => r.slug !== slug && r.data.tags.some(t => currentTags.includes(t)));
-});
-
 useSeoMeta({
 	title: `${recipe.value.data.title} | Žeru to.`,
 	description: recipe.value.data.description || recipe.value.data.title,
 	ogTitle: recipe.value.data.title,
 	ogDescription: recipe.value.data.description || recipe.value.data.title,
 });
-
-const metaPills = computed(() => [
-	{ label: 'Vaření', value: recipe.value?.data.cookTime || recipe.value?.data.timeToCook || '-' },
-	{ label: 'Porce', value: recipe.value?.data.servings || '-' },
-	{ label: 'Náročnost', value: recipe.value?.data.difficulty || '-' },
-]);
 </script>
 
 <template>
@@ -69,20 +55,7 @@ const metaPills = computed(() => [
 							{{ recipe.data.title }}
 						</BaseHeading>
 					</div>
-					<div class="grid grid-cols-3 gap-2 sm:gap-6 border border-border">
-						<div
-							v-for="pill in metaPills"
-							:key="pill.label"
-							class="flex flex-col items-center px-6 py-4 bg-background"
-						>
-							<span class="font-mono text-[10px] tracking-widest uppercase text-muted mb-1">
-								{{ pill.label }}
-							</span>
-							<span class="font-mono text-sm font-bold text-primary whitespace-nowrap">
-								{{ pill.value }}
-							</span>
-						</div>
-					</div>
+					<RecipeMeta :recipe-data="recipe.data" />
 				</div>
 			</div>
 
@@ -104,30 +77,11 @@ const metaPills = computed(() => [
 					>
 						Ingredience
 					</BaseHeading>
-					<div
+					<RecipeIngredientsGroup
 						v-for="group in recipe.data.ingredients"
 						:key="group.title"
-						class="mb-12 last:mb-0"
-					>
-						<BaseHeading
-							level="h4"
-							variant="h3"
-							class="mb-2 font-black text-sm tracking-wide"
-						>
-							{{ group.title }}
-						</BaseHeading>
-						<ul class="divide-y divide-border">
-							<li
-								v-for="item in group.items"
-								:key="item"
-								class="py-2"
-							>
-								<span class="text-foreground font-sans text-sm leading-relaxed">
-									{{ item }}
-								</span>
-							</li>
-						</ul>
-					</div>
+						:ingredients-group="group"
+					/>
 				</div>
 
 				<div class="py-10 md:pl-12">
@@ -137,12 +91,10 @@ const metaPills = computed(() => [
 					>
 						Postup
 					</BaseHeading>
-					<div class="prose prose-invert">
-						<MDCRenderer
-							:body="recipe.body"
-							:data="recipe.data"
-						/>
-					</div>
+					<RecipeDirections
+						:data="recipe.data"
+						:body="recipe.body"
+					/>
 				</div>
 			</div>
 
@@ -162,89 +114,7 @@ const metaPills = computed(() => [
 				</p>
 			</div>
 
-			<div
-				v-if="relatedRecipes.length > 0"
-				class="py-16"
-			>
-				<BaseHeading
-					level="h3"
-					variant="h4"
-					class="mb-4"
-				>
-					Další {{ recipe.data.tags[0] }}
-				</BaseHeading>
-				<div class="grid grid-cols-1 md:grid-cols-2">
-					<NuxtLink
-						v-for="r in relatedRecipes"
-						:key="r.slug"
-						:to="`/recepty/${r.slug}`"
-						class="group bg-background p-6 flex gap-6 transition border-b border-r border-l border-border first:border-t md:[&:nth-child(even)]:border-l-0 md:[&:nth-child(2)]:border-t"
-					>
-						<div class="size-24 relative overflow-hidden border border-border">
-							<NuxtImg
-								v-if="r.data.image"
-								:src="r.data.image"
-								:alt="r.data.title"
-								class="object-cover w-full h-full group-hover:scale-105 transition"
-							/>
-						</div>
-						<div class="flex flex-col justify-center gap-1">
-							<span
-								v-if="r.data.timeToCook"
-								class="font-mono text-[10px] tracking-widest uppercase text-muted"
-							>
-								{{ r.data.timeToCook }}
-							</span>
-							<h3 class="font-black uppercase tracking-tight text-lg decoration-1 group-hover:underline underline-offset-2">
-								{{ r.data.title }}
-							</h3>
-							<p
-								v-if="r.data.description"
-								class="text-sm text-muted line-clamp-2 leading-relaxed"
-							>
-								{{ r.data.description }}
-							</p>
-						</div>
-					</NuxtLink>
-				</div>
-			</div>
+			<RelatedRecipes :recipe="recipe" />
 		</main>
 	</div>
 </template>
-
-<style scoped>
-:deep(.prose ol) {
-	list-style: none;
-	padding-left: 0;
-	counter-reset: step;
-}
-
-:deep(.prose ol li) {
-	display: flex;
-	gap: 1.5rem;
-	padding: 1.5rem 0;
-	border-bottom: 1px solid var(--color-border);
-	position: relative;
-}
-
-@media (min-width: 768px) {
-	:deep(.prose ol li) {
-		gap: 2.5rem;
-	}
-}
-
-:deep(.prose ol li::before) {
-	counter-increment: step;
-	content: counter(step, decimal-leading-zero);
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-	font-size: 0.75rem;
-	color: var(--color-muted);
-	margin-top: 0.25rem;
-	width: 1.5rem;
-	flex-shrink: 0;
-}
-
-:deep(.prose ol li:last-child) {
-	border-bottom: none;
-}
-</style>
