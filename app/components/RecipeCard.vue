@@ -30,6 +30,7 @@ const metaItems = computed(() => {
 					v-if="recipe.data.image"
 					:src="recipe.data.image"
 					:alt="recipe.data.title"
+					placeholder="/placeholder.png"
 					class="object-cover w-full h-full transition group-hover:scale-105"
 				/>
 				<span

@@ -34,6 +34,7 @@ useSeoMeta({
 					:src="recipe.data.image"
 					:alt="recipe.data.title"
 					class="object-cover w-full h-full"
+					placeholder="/placeholder.png"
 				/>
 			</div>
 
