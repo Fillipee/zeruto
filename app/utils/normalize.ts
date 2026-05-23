@@ -9,3 +9,11 @@ export const normalizeStringArray = (value: unknown): string[] => {
 
 	return value.filter((item): item is string => typeof item === 'string');
 };
+
+export const normalizeString = (value: string): string => {
+	return value
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.trim();
+};
