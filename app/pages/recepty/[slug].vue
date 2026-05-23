@@ -2,8 +2,10 @@
 const { fetchRecipeBySlug } = useRecipes();
 
 const route = useRoute();
+const config = useRuntimeConfig();
 const slugParam = Array.isArray(route.params.slug) ? route.params.slug[0] : route.params.slug;
 const slug = typeof slugParam === 'string' ? slugParam : '';
+const siteUrl = config.public.siteUrl;
 
 const { data: recipe } = await useAsyncData(`recipe-${slug}`, () => fetchRecipeBySlug(slug));
 
@@ -15,6 +17,7 @@ useSeoMeta({
 	title: `${recipe.value.data.title} | Žeru to.`,
 	description: recipe.value.data.description || recipe.value.data.title,
 	ogTitle: recipe.value.data.title,
+	ogImage: `${siteUrl}/${recipe.value.data.image}`,
 	ogDescription: recipe.value.data.description || recipe.value.data.title,
 });
 </script>
