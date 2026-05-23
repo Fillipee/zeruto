@@ -13,7 +13,7 @@ const { data: recipes } = await useAsyncData('recipes', fetchRecipes);
 
 <template>
 	<section
-		class="pb-16 md:pb-32 pt-24"
+		class="pb-8 md:pb-16 pt-24"
 	>
 		<BaseHeading
 			level="h2"
@@ -46,6 +46,9 @@ const { data: recipes } = await useAsyncData('recipes', fetchRecipes);
 			class="text-sm text-gray-500"
 		>
 			Zatím tu žádné recepty nejsou.
+		</p>
+		<p class="text-sm text-muted mt-16 italic">
+			Fotografie jsou generovány pomocí AI. Jídlo se vždycky sní dřív, než ho stihnu vyfotit.
 		</p>
 	</section>
 </template>
