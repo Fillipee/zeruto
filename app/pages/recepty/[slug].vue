@@ -13,15 +13,6 @@ if (!recipe.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Recept nebyl nalezen.' });
 }
 
-const searchQuery = ref('');
-const router = useRouter();
-
-const handleSearch = () => {
-	if (searchQuery.value.trim()) {
-		router.push({ path: '/recepty', query: { q: searchQuery.value.trim() } });
-	}
-};
-
 useSeoMeta({
 	title: `${recipe.value.data.title} | Žeru to.`,
 	description: recipe.value.data.description || recipe.value.data.title,
@@ -36,33 +27,6 @@ useSeoMeta({
 		v-if="recipe"
 		class="container mx-auto min-h-screen bg-background text-foreground"
 	>
-		<!-- Top bar -->
-		<header class="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-			<div class="container mx-auto flex items-center justify-between py-4 px-4 gap-4">
-				<NuxtLink
-					to="/"
-					class="text-xl font-black tracking-tighter uppercase shrink-0"
-				>
-					Žeru to.
-				</NuxtLink>
-
-				<div class="hidden md:block w-full max-w-sm">
-					<BaseInput
-						v-model="searchQuery"
-						placeholder="Hledat recept..."
-						@keyup.enter="handleSearch"
-					/>
-				</div>
-
-				<NuxtLink
-					to="/recepty"
-					class="font-mono text-xs tracking-widest uppercase text-muted hover:text-primary transition flex items-center gap-2"
-				>
-					<span>←</span> <span class="hidden sm:inline">Všechny recepty</span>
-				</NuxtLink>
-			</div>
-		</header>
-
 		<main class="pt-20">
 			<div class="w-full h-[25vh] md:h-[40vh] overflow-hidden">
 				<NuxtImg
