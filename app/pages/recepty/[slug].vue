@@ -81,8 +81,8 @@ useSeoMeta({
 						Ingredience
 					</BaseHeading>
 					<RecipeIngredientsGroup
-						v-for="group in recipe.data.ingredients"
-						:key="group.title"
+						v-for="(group, index) in recipe.data.ingredients"
+						:key="`group-${index}`"
 						:ingredients-group="group"
 					/>
 				</div>

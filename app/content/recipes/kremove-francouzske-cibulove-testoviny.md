@@ -10,8 +10,7 @@ tags:
   - 'oběd'
   - 'těstoviny'
 ingredients:
-  - title: ''
-    items:
+  - items:
       - '4 cibule'
       - '2 lžíce másla'
       - '200g slaniny'

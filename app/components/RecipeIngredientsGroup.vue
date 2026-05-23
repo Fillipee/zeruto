@@ -9,6 +9,7 @@ const props = defineProps<{
 <template>
 	<div class="mb-12 last:mb-0">
 		<BaseHeading
+			v-if="props.ingredientsGroup.title"
 			level="h4"
 			variant="h3"
 			class="mb-2 font-black text-sm tracking-wide"

@@ -22,10 +22,10 @@ const normalizeIngredients = (value: unknown): RecipeIngredientGroup[] => {
 				return null;
 			}
 
-			const title = typeof group.title === 'string' ? group.title : '';
+			const title = typeof group.title === 'string' ? group.title : null;
 			const items = normalizeStringArray(group.items);
 
-			if (!title && items.length === 0) {
+			if (items.length === 0) {
 				return null;
 			}
 

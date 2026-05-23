@@ -1,10 +1,10 @@
 export interface RecipeIngredientGroup {
-	title: string;
+	title: string | null;
 	items: string[];
 }
 
 export interface RecipeData {
-	title: string;
+	title: string | null;
 	date: string;
 	image?: string;
 	timeToCook?: string;
